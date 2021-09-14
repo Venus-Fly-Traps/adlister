@@ -21,4 +21,20 @@ CREATE TABLE ads (
         ON DELETE CASCADE
 );
 
+USE adlister_db;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS ads_categories;
+
+CREATE TABLE categories (
+                       id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                       name varchar(50) NOT NULL,
+                       primary key (id)
+);
+
+CREATE TABLE ads_categories (
+                            ad_id int UNSIGNED NOT NULL,
+                            category_id int UNSIGNED NOT NULL,
+                            FOREIGN KEY (ad_id) REFERENCES users(id),
+                            FOREIGN KEY (category_id) REFERENCES categories(id)
+);
 
