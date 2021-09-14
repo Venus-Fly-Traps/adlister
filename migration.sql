@@ -21,4 +21,3 @@ CREATE TABLE ads (
         ON DELETE CASCADE
 );
 
-
