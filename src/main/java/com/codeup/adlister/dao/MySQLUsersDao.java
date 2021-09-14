@@ -6,8 +6,8 @@ import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
 
-public class MySQLUsersDao implements Users {
-    private Connection connection;
+class MySQLUsersDao implements Users {
+    private final Connection connection;
 
     public MySQLUsersDao(Config config) {
         try {
@@ -50,6 +50,16 @@ public class MySQLUsersDao implements Users {
         } catch (SQLException e) {
             throw new RuntimeException("Error creating new user", e);
         }
+    }
+
+    @Override
+    public User findUserById(long id) {
+        return null;
+    }
+
+    @Override
+    public Object allUsers() {
+        return null;
     }
 
     private User extractUser(ResultSet rs) throws SQLException {
