@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLAdsDao implements MySQLAdsDao1 {
+public class MySQLAdsDao implements Ads {
     private Connection connection = null;
 
     public MySQLAdsDao(Config config) {
@@ -39,19 +39,6 @@ public class MySQLAdsDao implements MySQLAdsDao1 {
         }
     }
 
-      @Override
-    public List<Ad> usersAds(int id) {
-        PreparedStatement stmt = null;
-        try {
-            stmt = connection.prepareStatement("SELECT * FROM ads WHERE user_id = ?");
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            return createAdsFromResults(rs);
-        } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving all ads.", e);
-        }
-    }
-
     @Override
     public Long insert(Ad ad) {
         try {
@@ -67,6 +54,11 @@ public class MySQLAdsDao implements MySQLAdsDao1 {
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }
+    }
+
+    @Override
+    public Ad findAdById(int id) {
+        return null;
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {

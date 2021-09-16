@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdsDao implements Ads {
-    private List<Ad> ads;
+    public List<Ad> ads;
 
     public List<Ad> all() {
         if (ads == null) {
@@ -16,13 +16,10 @@ public class ListAdsDao implements Ads {
     }
 
     public Long insert(Ad ad) {
-        // make sure we have ads
         if (ads == null) {
             ads = generateAds();
         }
-        // we'll assign an "id" here based on the size of the ads list
-        // really the dao would handle this
-        ad.setId((long) ads.size());
+        ad.setId(ads.size());
         ads.add(ad);
         return ad.getId();
     }
@@ -37,26 +34,26 @@ public class ListAdsDao implements Ads {
         ads.add(new Ad(
             1,
             1,
-            "playstation for sale",
-            "This is a slightly used playstation"
+            "PS5 Cheap!",
+            "Basically brand-new! Only used for 1 month of continuous gaming."
         ));
         ads.add(new Ad(
             2,
             1,
-            "Super Nintendo",
-            "Get your game on with this old-school classic!"
+            "XBox 1",
+            "Not a bad little system!"
         ));
         ads.add(new Ad(
             3,
             2,
-            "Junior Java Developer Position",
-            "Minimum 7 years of experience required. You will be working in the scripting language for Java, JavaScript"
+            "JAVA DUDE needed now!!!",
+            "Minimum 3 years of experience required. You will be working in the scripting                       language for Java, JavaScript. Recent graduate of CODEUP ACADEMY a PLUS!"
         ));
         ads.add(new Ad(
             4,
             2,
-            "JavaScript Developer needed",
-            "Must have strong Java skills"
+            "WEB Developer for thriving young company...grow with us!@",
+            "Must have strong WEB Dev skills"
         ));
         return ads;
     }
