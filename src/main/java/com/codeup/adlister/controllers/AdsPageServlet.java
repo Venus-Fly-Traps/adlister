@@ -4,33 +4,29 @@ import com.codeup.adlister.dao.Ads;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
-
-import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.IOException;
-import java.sql.SQLException;
 
-@WebServlet(name = "AdsPageServlet", value = "/showADS")
+
+
+@WebServlet(name = "AdsPageServlet", value = "/ads")
 public class AdsPageServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long id = Long.parseLong(request.getParameter("id"));
-		System.out.println(id);
-		Ads adsDao = DaoFactory.getAdsDao();
-		Ad adToUse;
-		User adAuthor;
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+		long id = Long.parseLong(request.getParameter("id"));
+		Ad ad = (Ad) DaoFactory.getAdsDao().findById(id);
+		request.setAttribute("ad", ad);
 
-		adToUse = adsDao.findAdById(id);
-		adAuthor = DaoFactory.getUsersDao().findUserById(adToUse.getId());
+		long user_id = DaoFactory.getAdsDao().findUserId(id);
+		User user = (User) DaoFactory.getAdsDao().findById(user_id);
+		request.setAttribute("user", user);
 
-		request.setAttribute("adAuthor", adAuthor);
-		request.setAttribute("ads", adToUse);
-        request.setAttribute("users", DaoFactory.getUsersDao().allUsers());
-        request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        request.getRequestDispatcher("/WEB-INF/ADS.jsp").forward(request, response);
-    }
+		request.getRequestDispatcher("/WEB-INF/ads/display.jsp");
+
+	}
+
 }
+
 
 
 

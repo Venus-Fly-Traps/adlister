@@ -15,6 +15,7 @@ public class ListAdsDao implements Ads {
         return ads;
     }
 
+    @Override
     public Long insert(Ad ad) {
         if (ads == null) {
             ads = generateAds();
@@ -25,35 +26,41 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
-    public Ad findAdById(int id) {
+    public Ads findById(long user_id) {
         return null;
+    }
+
+    @Override
+    public long findUserId(long id) {
+        return 0;
     }
 
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(
-            1,
-            1,
-            "PS5 Cheap!",
-            "Basically brand-new! Only used for 1 month of continuous gaming."
+                1,
+                1,
+                "PS5 Cheap!",
+                "Basically brand-new! Only used for 1 month of continuous gaming."
         ));
         ads.add(new Ad(
-            2,
-            1,
-            "XBox 1",
-            "Not a bad little system!"
+                2,
+                1,
+                "XBox 1",
+                "Not a bad little system!"
         ));
         ads.add(new Ad(
-            3,
-            2,
-            "JAVA DUDE needed now!!!",
-            "Minimum 3 years of experience required. You will be working in the scripting                       language for Java, JavaScript. Recent graduate of CODEUP ACADEMY a PLUS!"
+                3,
+                2,
+                "JAVA DUDE needed now!!!",
+                "Minimum 3 years of experience required. You will be working in the scripting" +
+                        "language for Java, JavaScript. Recent graduate of CODEUP ACADEMY a PLUS!"
         ));
         ads.add(new Ad(
-            4,
-            2,
-            "WEB Developer for thriving young company...grow with us!@",
-            "Must have strong WEB Dev skills"
+                4,
+                2,
+                "WEB Developer for thriving young company...grow with us!@",
+                "Must have strong WEB Dev skills"
         ));
         return ads;
     }

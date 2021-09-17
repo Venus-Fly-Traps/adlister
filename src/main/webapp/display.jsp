@@ -14,6 +14,6 @@
     <title>ADS</title>
 </head>
 <body>
-<a href="ADS.jsp" > Anchor Display Text. Click Here! </a>
+<h2>Display ADS here!!!</h2>
 </body>
 </html>
