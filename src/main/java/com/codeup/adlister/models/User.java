@@ -9,7 +9,7 @@ public class User {
     private String password;
 
     public User() {}
-
+    // this constructor is used to insert a new user /register
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
@@ -22,6 +22,7 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
 
     public long getId() {
         return id;

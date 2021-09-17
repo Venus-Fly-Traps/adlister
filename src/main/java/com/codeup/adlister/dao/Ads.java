@@ -12,5 +12,9 @@ public interface Ads {
 
     Ad findById(long user_id);
 
-    long findUserId(long id);
+    void updateAds(Ad ad);
+    void deleteAds(long id);
+    Ad findOneById(long id);
+    List<Ad> getByUserId(long user_id);
+
 }

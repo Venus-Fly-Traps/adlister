@@ -9,9 +9,11 @@ public interface Users {
     User findByUsername(String username);
     Long insert(User user);
 
-    User findUserById(long id) throws SQLException;
-
-    Object allUsers();
-
     User findById(long user_id);
+
+    void update(User user);
+
+
+    User findOneUserById(long userId);
+
 }

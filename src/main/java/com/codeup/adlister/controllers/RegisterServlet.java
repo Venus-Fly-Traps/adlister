@@ -29,6 +29,7 @@ public class RegisterServlet extends HttpServlet {
             || (! password.equals(passwordConfirmation));
 
         if (inputHasErrors) {
+            request.setAttribute("inputHasErrors", true);
             response.sendRedirect("/register");
             return;
         }
