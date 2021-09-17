@@ -12,4 +12,6 @@ public interface Users {
     User findUserById(long id) throws SQLException;
 
     Object allUsers();
+
+    User findById(long user_id);
 }

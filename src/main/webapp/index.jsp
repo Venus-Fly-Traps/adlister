@@ -12,9 +12,13 @@
     <div class="container">
         <h1>Adlister...lister of ADS!</h1>
 
+        <a href = "http://www.google.com/">Google Search Engine</a>
+        <p>I'm creating a link to
+            <a href="https://www.mozilla.org/en-US/">the Mozilla homepage</a>.
+        </p>
         <c:forEach var="ad" items="${ads}">
           <div class="col-md-6">
-            <a href="${pageContext.request.contextPath}/ads/display?id=${ad.id}">
+            <a href="${pageContext.request.contextPath}WEB-INF/ads/display.jsp?id=${ad.id}">
                 <h1>${ad.title}</h1>
             </a>
               <p>${ad.description}</p>
