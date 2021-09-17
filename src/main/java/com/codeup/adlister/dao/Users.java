@@ -7,6 +7,8 @@ import java.util.List;
 public interface Users {
     User findByUsername(String username);
     Long insert(User user);
-    boolean update(User user);
-    boolean delete(Long myId);
+    void update(User user);
+
+
+    User findOneUserById(long userId);
 }

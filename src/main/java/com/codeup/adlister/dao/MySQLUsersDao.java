@@ -53,30 +53,31 @@ public class MySQLUsersDao implements Users {
     }
 
     @Override
-    public boolean update(User user) {
-        String query = "UPDATE users SET email = ?, password = ? WHERE id = ?";
+    public void update(User user) {
+        String query = "UPDATE users SET username= ?, email = ?, password = ? WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setString(1, user.getEmail());
-            stmt.setString(2, user.getPassword());
-            stmt.setLong(3, user.getId());
-            return stmt.executeUpdate() > 0;
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setLong(4, user.getId());
+             stmt.executeUpdate() ;
         } catch (SQLException e) {
             throw new RuntimeException("Error updating a user", e);
         }
     }
 
-    @Override
-    public boolean delete(Long myId) {
-        String query = "DELETE FROM users WHERE id = ?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setLong(1, myId);
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            throw new RuntimeException("Error deleting a user", e);
-        }
-    }
+//    @Override
+//    public void delete(Long myId) {
+//        String query = "DELETE FROM users WHERE id = ?";
+//        try {
+//            PreparedStatement stmt = connection.prepareStatement(query);
+//            stmt.setLong(1, myId);
+//            stmt.executeUpdate() ;
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error deleting a user", e);
+//        }
+//    }
 
 
     private User extractUser(ResultSet rs) throws SQLException {
@@ -89,6 +90,20 @@ public class MySQLUsersDao implements Users {
             rs.getString("email"),
             rs.getString("password")
         );
+    }
+    public User findOneUserById(long id){
+        PreparedStatement stmt=null;
+
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM Users where id=?");
+            stmt.setLong(1,id);
+            ResultSet rs= stmt.executeQuery();
+            if(rs.next()){
+                return extractUser(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } return null;
     }
 
 }

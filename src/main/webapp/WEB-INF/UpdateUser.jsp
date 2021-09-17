@@ -8,22 +8,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:include page="WEB-INF/partials/partials/head.jsp">
+    <jsp:include page="partials/partials/head.jsp">
         <jsp:param name="title" value="Update Profile For Our Site!" />
     </jsp:include>
 </head>
 <body>
-<jsp:include page="WEB-INF/partials/partials/navbar.jsp" />
+<jsp:include page="partials/partials/navbar.jsp" />
 <div class="container">
     <h1>Please fill in your information.</h1>
     <form action="/update" method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text">
+            <input id="username" name="username" value="${userUpdate.username}" class="form-control" type="text">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="text">
+            <input id="email" name="email" class="form-control" type="text" value="${userUpdate.email}">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
