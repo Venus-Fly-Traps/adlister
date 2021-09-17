@@ -7,7 +7,7 @@ import com.mysql.cj.jdbc.Driver;
 import java.sql.*;
 
 public class MySQLUsersDao implements Users {
-    private Connection connection;
+    private final Connection connection;
 
     public MySQLUsersDao(Config config) {
         try {
@@ -52,6 +52,34 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    @Override
+    public void update(User user) {
+        String query = "UPDATE users SET username= ?, email = ?, password = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setLong(4, user.getId());
+             stmt.executeUpdate() ;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating a user", e);
+        }
+    }
+
+//    @Override
+//    public void delete(Long myId) {
+//        String query = "DELETE FROM users WHERE id = ?";
+//        try {
+//            PreparedStatement stmt = connection.prepareStatement(query);
+//            stmt.setLong(1, myId);
+//            stmt.executeUpdate() ;
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error deleting a user", e);
+//        }
+//    }
+
+
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {
             return null;
@@ -62,6 +90,20 @@ public class MySQLUsersDao implements Users {
             rs.getString("email"),
             rs.getString("password")
         );
+    }
+    public User findOneUserById(long id){
+        PreparedStatement stmt=null;
+
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM Users where id=?");
+            stmt.setLong(1,id);
+            ResultSet rs= stmt.executeQuery();
+            if(rs.next()){
+                return extractUser(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } return null;
     }
 
 }
