@@ -6,6 +6,7 @@
   </jsp:include>
 </head>
 <body>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container">
   <h1>Update Current Ad</h1>
   <form action="/ads/update" method="post">
