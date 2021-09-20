@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -27,6 +28,12 @@
                 <input id="confirm_password" name="confirm_password" class="form-control" type="password">
             </div>
             <input type="submit" class="btn btn-primary btn-block">
+            <c:if test="${invalidUsername}">
+                <small>Sorry, that username is already taken.</small>
+            </c:if>
+            <c:if test="${inputHasErrors}">
+                <small>Please make sure your password and password confirmation are the same.</small>
+            </c:if>
         </form>
     </div>
 </body>
