@@ -16,7 +16,7 @@ public class RegisterServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -24,19 +24,26 @@ public class RegisterServlet extends HttpServlet {
 
         // validate input
         boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
+                || email.isEmpty()
+                || password.isEmpty()
+                || (!password.equals(passwordConfirmation));
 
         if (inputHasErrors) {
             request.setAttribute("inputHasErrors", true);
+            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             response.sendRedirect("/register");
+            return;
+
+        } else if (DaoFactory.getUsersDao().findByUsername(username) != null) {
+            request.setAttribute("invalidUsername", true);
+            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             return;
         }
 
-        // create and save a new user
-        User user = new User(username, email, password);
-        DaoFactory.getUsersDao().insert(user);
-        response.sendRedirect("/login");
+            // create and save a new user
+            User user = new User(username, email, password);
+            DaoFactory.getUsersDao().insert(user);
+            response.sendRedirect("/login");
+        }
     }
-}
+

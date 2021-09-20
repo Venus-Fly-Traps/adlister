@@ -14,5 +14,7 @@ public interface Users {
 
     void update(User user);
 
-    AtomicLong findUserId(long id);
+
+    User findOneUserById(long userId);
+
 }
