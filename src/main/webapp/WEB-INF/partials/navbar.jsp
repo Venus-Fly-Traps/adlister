@@ -17,7 +17,7 @@
         <c:when test="${sessionScope.user!=null}">
             <li><a href="/profile">Profile</a></li>
             <li><a href="/ads/create">Create Ad</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/logout">Logout</a></li>git
             <li><a href="/search">Search</a></li>
         </c:when>
     <c:otherwise>
