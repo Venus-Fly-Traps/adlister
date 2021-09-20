@@ -5,8 +5,11 @@ import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
+import java.util.concurrent.atomic.AtomicLong;
+
 
 public class MySQLUsersDao implements Users {
+
     private final Connection connection;
 
     public MySQLUsersDao(Config config) {
@@ -22,7 +25,6 @@ public class MySQLUsersDao implements Users {
         }
     }
 
-
     @Override
     public User findByUsername(String username) {
         String query = "SELECT * FROM users WHERE username = ? LIMIT 1";
@@ -32,6 +34,18 @@ public class MySQLUsersDao implements Users {
             return extractUser(stmt.executeQuery());
         } catch (SQLException e) {
             throw new RuntimeException("Error finding a user by username", e);
+        }
+    }
+
+    public User findById(long id) {
+        String query = "SELECT * FROM users WHERE id = ? LIMIT 1";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, String.valueOf(id));
+            return extractUser(stmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException("Unable to locate user by id", e);
         }
     }
 
@@ -67,6 +81,11 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    @Override
+    public AtomicLong findUserId(long id) {
+        return null;
+    }
+
 //    @Override
 //    public void delete(Long myId) {
 //        String query = "DELETE FROM users WHERE id = ?";
@@ -78,7 +97,6 @@ public class MySQLUsersDao implements Users {
 //            throw new RuntimeException("Error deleting a user", e);
 //        }
 //    }
-
 
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {

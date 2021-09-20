@@ -9,8 +9,16 @@ public interface Ads {
     List<Ad> all();
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
+
+    Ad findById(long user_id);
+
     void updateAds(Ad ad);
     void deleteAds(long id);
     Ad findOneById(long id);
     List<Ad> getByUserId(long user_id);
+
+    List<Ad> findAds(String keywords);
+
+
+//    Object findAds(String keywords);
 }
