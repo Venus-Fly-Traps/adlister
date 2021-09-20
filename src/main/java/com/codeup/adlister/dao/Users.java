@@ -4,6 +4,7 @@ import com.codeup.adlister.models.User;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public interface Users {
     User findByUsername(String username);
@@ -13,7 +14,5 @@ public interface Users {
 
     void update(User user);
 
-
-    User findOneUserById(long userId);
-
+    AtomicLong findUserId(long id);
 }

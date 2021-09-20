@@ -32,8 +32,16 @@ CREATE TABLE categories (
 CREATE TABLE ads_categories (
                             ad_id int UNSIGNED NOT NULL,
                             category_id int UNSIGNED NOT NULL,
-                            FOREIGN KEY (ad_id) REFERENCES users(id),
+                            FOREIGN KEY (ad_id) REFERENCES categories(id),
                             FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+CREATE TABLE ads_users (
+                           ad_id int UNSIGNED NOT NULL,
+                           user_id int UNSIGNED NOT NULL,
+                           FOREIGN KEY (ad_id) REFERENCES users(id),
+                           FOREIGN KEY (user_id) REFERENCES users(id)
+
 );
 
 

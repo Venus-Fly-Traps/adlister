@@ -5,6 +5,7 @@ import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 
 public class MySQLUsersDao implements Users {
@@ -78,6 +79,11 @@ public class MySQLUsersDao implements Users {
         } catch (SQLException e) {
             throw new RuntimeException("Error updating a user", e);
         }
+    }
+
+    @Override
+    public AtomicLong findUserId(long id) {
+        return null;
     }
 
 //    @Override

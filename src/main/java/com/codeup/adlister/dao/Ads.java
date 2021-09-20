@@ -17,4 +17,8 @@ public interface Ads {
     Ad findOneById(long id);
     List<Ad> getByUserId(long user_id);
 
+    List<Ad> findAds(String keywords);
+
+
+//    Object findAds(String keywords);
 }
